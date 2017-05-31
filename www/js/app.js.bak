@@ -27,14 +27,14 @@ angular.module('starter', ['ionic'])
 	 .state('index',{
 	 url: '/index',
 	 templateUrl: 'templates/menu.html',
-		 //controller: 'AppCtrl'
+		controller: 'AppCtrl'
  })
 	
 
 	 .state('login',{
 	 url: '/login',
 	 templateUrl: 'templates/login.html',
-		//controller: 'AppCtrl'
+		controller: 'AppCtrl'
 	 })
 		 
 	 .state('history',{
@@ -53,5 +53,39 @@ angular.module('starter', ['ionic'])
 	 templateUrl: 'templates/option.html',
 		//controller: 'AppCtrl'
 	 })
+		 .state('gallory',{
+	 url: '/gallory',
+	 templateUrl: 'templates/gallory.html',
+		//controller: 'AppCtrl'
+	 })
 	$urlRouterProvider.otherwise('/login');
-});
+})
+.controller('AppCtrl',function ($scope,$state,$ionicPopup){
+
+	$scope.login={};
+var user="admin";
+var password = "123456";
+	$scope.doLogin = function(){
+		console.log("alert");
+		console.log(password);
+		console.log($scope.login.username);
+		console.log($scope.login.password);
+			
+				if($scope.login.username == 'admin' && $scope.login.password =='123456'){
+				$ionicPopup.alert({
+                  title:'LOGIN Susses',
+                  template:'Wellcome'
+				  })
+					$state.go("history")
+				}else{
+			$ionicPopup.alert({
+                  title:'LOGIN',
+                  template:'Errer Plases User & Password '
+				 
+			})
+			 $state.go("login")
+			}
+		
+	}
+})
+

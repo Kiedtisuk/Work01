@@ -60,32 +60,16 @@ angular.module('starter', ['ionic'])
 	 })
 	$urlRouterProvider.otherwise('/login');
 })
-.controller('AppCtrl',function ($scope,$state,$ionicPopup){
-
+.controller('AppCtrl',function ($scope,$state,$ionicPopup,$str,$http){
+var url="http://localhost/ionic_php";
 	$scope.login={};
-var user="admin";
-var password = "123456";
 	$scope.doLogin = function(){
-		console.log("alert");
-		console.log(password);
-		console.log($scope.login.username);
-		console.log($scope.login.password);
-			
-				if($scope.login.username == user && $scope.login.password == password){
-				$ionicPopup.alert({
-                  title:'LOGIN Susses',
-                  template:'Wellcome'
-				  })
-					$state.go("history")
-				}else{
-			$ionicPopup.alert({
-                  title:'LOGIN',
-                  template:'Errer Plases User & Password '
-				 
-			})
-			 $state.go("login")
-			}
-		
+var user=$scope.login.username;
+var password = $scope.login.password;			
+				if(user && password){
+		str=url+"login.php?username = "+user+" & Password = "+password;
+		$http.get(str)
+				
 	}
 })
 
